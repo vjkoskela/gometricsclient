@@ -1,0 +1,10 @@
+language: go
+sudo: false
+go:
+- 1.5
+go_import_path: github.com/vjkoskela/gometricsclient
+install:
+- go get -t ./...
+script:
+- go install
+- go test -coverprofile=coverage.out
