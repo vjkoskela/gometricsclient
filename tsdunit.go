@@ -15,15 +15,37 @@ limitations under the License.
 */
 package gometricsclient
 
-// Interface for a compound unit representation.
-type CompoundUnit interface {
+var (
+	_ Unit = (*tsdUnit)(nil)
+)
 
-	// Numerator units accessor.
-	NumeratorUnits() []Unit
+// Unit implementation.
+type tsdUnit struct {
+	baseUnit baseUnit
+	baseScale baseScale
+}
 
-	// Denominator units accessor.
-	DenominatorUnits() []Unit
+func newTsdUnit(u baseUnit) *tsdUnit {
+	return &tsdUnit{
+		baseUnit: u,
+	}
+}
 
-	// Name of the unit. Inherited from Unit interface.
-	Name() string
+func newTsdUnitWithScale(u baseUnit, s baseScale) *tsdUnit {
+	return &tsdUnit{
+		baseUnit: u,
+		baseScale: s,
+	}
+}
+
+func (u *tsdUnit) Name() string {
+	return u.baseScale.Name() + u.baseUnit.Name()
+}
+
+func (u *tsdUnit) BaseUnit() baseUnit {
+	return u.baseUnit
+}
+
+func (u *tsdUnit) BaseScale() baseScale {
+	return u.baseScale
 }

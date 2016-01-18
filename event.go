@@ -25,7 +25,7 @@ type Event interface {
 	TimerSamples() map[string][]Quantity
 
 	// Counter samples by name for unit of work.
-	CounterySamples() map[string][]Quantity
+	CounterSamples() map[string][]Quantity
 
 	// Gauge samples by name for unit of work.
 	GaugeSamples() map[string][]Quantity

@@ -15,15 +15,34 @@ limitations under the License.
 */
 package gometricsclient
 
-// Interface for a compound unit representation.
-type CompoundUnit interface {
+var (
+	_ Quantity = (*tsdQuantity)(nil)
+)
 
-	// Numerator units accessor.
-	NumeratorUnits() []Unit
+// Quantity implementation.
+type tsdQuantity struct {
+	value interface{}
+	unit Unit
+}
 
-	// Denominator units accessor.
-	DenominatorUnits() []Unit
+func newTsdQuantityFromLong(v int64, u Unit) *tsdQuantity {
+	return &tsdQuantity{
+		value: v,
+		unit: u,
+	}
+}
 
-	// Name of the unit. Inherited from Unit interface.
-	Name() string
+func newTsdQuantityFromDouble(v float64, u Unit) *tsdQuantity {
+	return &tsdQuantity{
+		value: v,
+		unit: u,
+	}
+}
+
+func (q *tsdQuantity) Value() interface{} {
+	return q.value
+}
+
+func (q *tsdQuantity) Unit() Unit {
+	return q.unit
 }

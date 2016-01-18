@@ -15,3 +15,31 @@ limitations under the License.
 */
 package gometricsclient
 
+var (
+	// ** Time **
+
+	// Nanoseconds.
+	Nanosecond Unit = newTsdUnitWithScale(second, nano)
+
+	// Microseconds.
+	Microsecond Unit = newTsdUnitWithScale(second, micro)
+
+	// Milliseconds.
+	Millisecond Unit = newTsdUnitWithScale(second, milli)
+
+	// Seconds.
+	Second Unit = newTsdUnit(second)
+
+	// Minutes.
+	Minute Unit = newTsdUnit(minute)
+
+	// Hours.
+	Hour Unit = newTsdUnit(hour)
+
+	// Days.
+	Day Unit = newTsdUnit(day)
+
+	// ** Frequency **
+
+	// TODO: Define all other supported units.
+)

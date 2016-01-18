@@ -19,5 +19,5 @@ package gometricsclient
 type Sink interface {
 
 	// Record event when invoked by Metrics.
-	record(*Event)
+	record(Event)
 }

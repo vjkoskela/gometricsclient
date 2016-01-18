@@ -15,15 +15,27 @@ limitations under the License.
 */
 package gometricsclient
 
-// Interface for a compound unit representation.
-type CompoundUnit interface {
+import (
+	"github.com/Sirupsen/logrus"
+)
 
-	// Numerator units accessor.
-	NumeratorUnits() []Unit
+var (
+	_ Sink = (*warningSink)(nil)
+)
 
-	// Denominator units accessor.
-	DenominatorUnits() []Unit
+// Sink implementation which emits a warning each time an Event is to recorded.
+type warningSink struct {
+	reasons []string
+	logger logrus.StdLogger
+}
 
-	// Name of the unit. Inherited from Unit interface.
-	Name() string
+func newWarningSink(r []string, l logrus.StdLogger) *warningSink {
+	if (l == nil) {
+		l = logrus.StandardLogger()
+	}
+	return &warningSink{reasons: r, logger: l}
+}
+
+func (ws *warningSink) record(e Event) {
+	ws.logger.Printf("Unable to record event, metrics disabled; reasons=%v", ws.reasons)
 }

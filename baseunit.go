@@ -15,15 +15,52 @@ limitations under the License.
 */
 package gometricsclient
 
-// Interface for a compound unit representation.
-type CompoundUnit interface {
+var (
+	_ Unit = (*baseUnit)(nil)
+)
 
-	// Numerator units accessor.
-	NumeratorUnits() []Unit
+// Base unit.
+type baseUnit int
 
-	// Denominator units accessor.
-	DenominatorUnits() []Unit
+const (
+	// ** Time **
+	second baseUnit = iota + 1
+	minute
+	hour
+	day
+	week
 
-	// Name of the unit. Inherited from Unit interface.
-	Name() string
+	// ** Size **
+	bit
+	byte
+
+	// ** Rotation **
+	rotation
+	degree
+	radian
+
+	// ** Temperature **
+	celcius
+	fahrenheit
+	kelvin
+)
+
+var baseUnits = [...]string {
+	"second",
+	"minute",
+	"hour",
+	"day",
+	"week",
+	"bit",
+	"byte",
+	"rotation",
+	"degree",
+	"radian",
+	"celsius",
+	"fahrenheit",
+	"kelvin",
+}
+
+func (bu baseUnit) Name() string {
+	return baseUnits[bu - 1]
 }
